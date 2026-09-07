@@ -44,7 +44,6 @@ type ApiPartnerSplitFundRequest struct {
 	// 字段含义：本次分账的接收方明细列表。
 	// 格式规则：单次请求最多 50 个接收方。
 	// 业务规则：每个接收方的字段语义见 Receiver。
-	// 示例：TODO（请参考 Receiver 示例）
 	Receivers []ApiPartnerReceiver `json:"receivers,omitempty"`
 	// 是否解冻剩余未分账资金
 	// 字段含义：是否将剩余未分账金额解冻回商户。
@@ -100,7 +99,6 @@ type ApiPartnerReceiver struct {
 	// 字段含义：分账接收方商户全称或个人姓名。
 	// 格式规则：长度为 1-1024，敏感字段需用平台证书公钥加密。
 	// 业务规则：MERCHANT_ID 类型必传；个人类型选传，传入时会校验实名匹配。
-	// 示例：TODO（官方文档未提供明文示例）
 	Name string `json:"name,omitempty"`
 	// 分账金额
 	// 字段含义：本次分给该接收方的金额。
@@ -540,7 +538,6 @@ type AddReceiverRequest struct {
 	// 字段含义：分账接收方商户全称或个人姓名。
 	// 格式规则：长度为 1-1024，敏感字段需用平台证书公钥加密。
 	// 业务规则：MERCHANT_ID 类型必传；个人类型选传，传入时会校验实名匹配。
-	// 示例：TODO（官方文档未提供明文示例）
 	Name string `json:"name,omitempty"`
 	// 与分账方的关系类型
 	// 字段含义：分账发起方商户与分账接收方的关系。
@@ -552,7 +549,6 @@ type AddReceiverRequest struct {
 	// 字段含义：特约商户与接收方的具体关系。
 	// 格式规则：长度为 1-10。
 	// 业务规则：仅当 RelationType 为 CUSTOM 时必填。
-	// 示例：TODO（官方文档未提供示例）
 	CustomRelation string `json:"custom_relation,omitempty"`
 }
 

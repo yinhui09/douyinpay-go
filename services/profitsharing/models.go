@@ -32,7 +32,6 @@ type SplitFundRequest struct {
 	// 字段含义：分账接收方列表。
 	// 格式规则：单次请求最多 50 个分账接收方。
 	// 业务规则：可以设置出资商户作为分账接收方。
-	// 示例：TODO（请参考 SplitReceiver 示例）
 	Receivers []SplitReceiver `json:"receivers,omitempty"`
 	// 是否解冻剩余未分账资金
 	// 字段含义：是否将该笔订单剩余未分账金额解冻给商户。
@@ -94,7 +93,6 @@ type SplitReceiver struct {
 	// 格式规则：长度为 1-1024，敏感字段需使用抖音支付平台证书公钥加密。
 	// 业务规则：MERCHANT_ID 类型必传；PERSONAL_OPENID 类型选传，传入时会检查实名匹配。
 	// 示例：
-	// TODO: 官方文档未提供标准示例值，暂留空。
 	Name string `json:"name,omitempty"`
 	// 分账金额
 	// 字段含义：分账金额。
@@ -478,7 +476,6 @@ type AddSplitReceiverRequest struct {
 	// 格式规则：最多 10 个字。
 	// 业务规则：当 RelationType 为 CUSTOM 时必填；其他关系类型无需填写。
 	// 示例：
-	// TODO: 官方文档未提供标准示例值，暂留空。
 	CustomRelation string `json:"custom_relation,omitempty"`
 }
 
