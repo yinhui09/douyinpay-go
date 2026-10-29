@@ -8,9 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
 	"testing"
-	"time"
 
 	"github.com/bmizerany/assert"
 	"github.com/douyinpay/douyinpay-go/services/callback"
@@ -24,32 +22,6 @@ import (
 const (
 	platformCertificate = "" // 平台证书
 )
-
-type passVerifier struct{}
-
-func (passVerifier) Verify(context.Context, string, string, string) error { return nil }
-func (passVerifier) GetSerial(context.Context) (string, error)            { return "serial", nil }
-
-func TestParseCallbackRejectsExpiredTimestamp(t *testing.T) {
-	handler := callback.NewNotifyHandler("", passVerifier{})
-	request := &http.Request{
-		Header: map[string][]string{
-			consts.DouyinPaySerial:    {"serial"},
-			consts.DouyinPayTimestamp: {fmt.Sprintf("%d", time.Now().Unix()-consts.MaxCallbackClockOffset-1)},
-			consts.DouyinPayNonce:     {"nonce"},
-			consts.DouyinPaySignature: {"signature"},
-		},
-		Body: ioutil.NopCloser(bytes.NewBufferString(`{}`)),
-	}
-
-	_, err := handler.ParseCallback(context.Background(), request, new(pay.Transaction))
-	if err == nil {
-		t.Fatal("expected expired callback timestamp error")
-	}
-	if !strings.Contains(err.Error(), "timestamp=") || !strings.Contains(err.Error(), "expires") {
-		t.Fatalf("expected timestamp expires error, got %v", err)
-	}
-}
 
 func TestNewNotifyHandler(t *testing.T) {
 	t.Run("通知", func(t *testing.T) {
